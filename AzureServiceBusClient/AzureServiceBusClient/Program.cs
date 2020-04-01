@@ -54,9 +54,8 @@ namespace AzureServiceBusClient
 
                 var message = new Message(Encoding.UTF8.GetBytes(messageBody));
                 Console.WriteLine($"Message Added in Queue: {messageBody}");
-                queueClient.SendAsync(message);
-
-
+                DateTimeOffset scheduleTime = DateTime.UtcNow.AddMinutes(5);
+                queueClient.ScheduleMessageAsync(message, scheduleTime);
             }
             catch (Exception ex)
             {
